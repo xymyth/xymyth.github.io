@@ -53,11 +53,18 @@
             z-index: 1000;
         }
 
-        #memory-photo {
-            width: 100%;
-            margin-bottom: 12px;
+        #memory-photos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
         }
 
+        #memory-photos img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+        }
         #memory-title {
             font-family: 'Times New Roman', Times, serif;
             font-size: 23px;
@@ -82,7 +89,7 @@
 
     <div id="map">
         <div id="memory-card">
-            <img id="memory-photo" src="" alt="">
+            <div id="memory-photo"></div>
             <h2 id="memory-title"></h2>
             <p id="memory-note"></p>
         </div>
@@ -106,7 +113,11 @@
             {
                 name: "Hefei",
                 coords: [31.8206, 117.2272],
-                photo: "photos/hefei.jpg",
+                photos: [
+                    "photos/hefei-1.jpg",
+                    "photos/hefei-2.jpg",
+                    "photos/hefei-3.jpg"
+                ],
                 note: "Family."
             },
             {
