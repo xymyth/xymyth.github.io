@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>Travel | Yarong Xiao</title>
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+
     <style>
         body {
             font-family: 'Times New Roman', Times, serif;
@@ -29,7 +31,8 @@
         }
 
         #map {
-            margin-top: 20px;
+            width: 100%;
+            height: 520px;
         }
     </style>
 </head>
@@ -40,9 +43,29 @@
         <a href="../index.html">← Home</a>
     </div>
 
-    <div id="map">
-        <!-- map will be added here later -->
-    </div>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        const map = L.map("map").setView([25, 0], 2);
+
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: ""
+        }).addTo(map);
+
+        const places = [
+            { name: "Hefei", coords: [31.8206, 117.2272] },
+            { name: "Beijing", coords: [39.9042, 116.4074] },
+            { name: "Rochester", coords: [43.1566, -77.6088] },
+        ];
+
+        places.forEach(place => {
+            L.marker(place.coords)
+                .addTo(map)
+                .bindTooltip(place.name);
+        });
+    </script>
 
 </body>
 
