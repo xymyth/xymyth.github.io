@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Travel | Yarong </title>
+    <title>Travel | Yarong</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
 
@@ -37,9 +37,9 @@
         }
 
         .small-dot {
-            width: 9px;
-            height: 9px;
-            background: #b7410e;
+            width: 7px;
+            height: 7px;
+            background: #8b2f2f;
             border-radius: 50%;
             border: 1px solid white;
         }
@@ -47,12 +47,12 @@
         #memory-card {
             display: none;
             position: absolute;
-            right: 90px;
-            top: 180px;
+            right: 28px;
+            top: 28px;
             width: 230px;
             background: white;
             padding: 18px;
-            box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
             z-index: 1000;
         }
 
@@ -70,8 +70,8 @@
         #memory-note {
             font-size: 16px;
             line-height: 1.5;
+            margin: 0;
         }
-        
     </style>
 </head>
 
@@ -81,11 +81,12 @@
         <a href="../index.html">← Home</a>
     </div>
 
-    <div id="map"></div>
-    <div id="memory-card">
+    <div id="map">
+        <div id="memory-card">
             <img id="memory-photo" src="" alt="">
             <h2 id="memory-title"></h2>
             <p id="memory-note"></p>
+        </div>
     </div>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -97,61 +98,43 @@
             attribution: ""
         }).addTo(map);
 
+        const smallIcon = L.divIcon({
+            className: "small-dot",
+            iconSize: [7, 7]
+        });
+
         const places = [
-            { name: "Hefei", coords: [31.8206, 117.2272] },
-            { name: "Beijing", coords: [39.9042, 116.4074] },
-            { name: "Rochester", coords: [43.1566, -77.6088] },
+            {
+                name: "Hefei",
+                coords: [31.8206, 117.2272],
+                photo: "photos/hefei.jpg",
+                note: "Where everything quietly began."
+            },
+            {
+                name: "Beijing",
+                coords: [39.9042, 116.4074],
+                photo: "photos/beijing.jpg",
+                note: "A city of departures, pressure, and growing up."
+            },
+            {
+                name: "Rochester",
+                coords: [43.1566, -77.6088],
+                photo: "photos/rochester.jpg",
+                note: "Snow, silence, long runs, and becoming someone new."
+            }
         ];
 
         places.forEach(place => {
-            L.marker(place.coords)
-                .addTo(map)
-                .bindTooltip(place.name);
+            const marker = L.marker(place.coords, { icon: smallIcon }).addTo(map);
+
+            marker.on("mouseover", () => {
+                document.getElementById("memory-photo").src = place.photo;
+                document.getElementById("memory-title").textContent = place.name;
+                document.getElementById("memory-note").textContent = place.note;
+                document.getElementById("memory-card").style.display = "block";
+            });
         });
-    <script>
-            const map = L.map("map").setView([25, 0], 2);
-
-            L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                attribution: ""
-            }).addTo(map);
-
-            const smallIcon = L.divIcon({
-                className: "small-dot",
-                iconSize: [9, 9]
-            });
-
-            const places = [
-                {
-                    name: "Hefei",
-                    coords: [31.8206, 117.2272],
-                    photo: "photos/hefei.jpg",
-                    note: "Where everything quietly began."
-                },
-                {
-                    name: "Beijing",
-                    coords: [39.9042, 116.4074],
-                    photo: "photos/beijing.jpg",
-                    note: "A city of departures, pressure, and growing up."
-                },
-                {
-                    name: "Rochester",
-                    coords: [43.1566, -77.6088],
-                    photo: "photos/rochester.jpg",
-                    note: "Snow, silence, long runs, and becoming someone new."
-                }
-            ];
-
-            places.forEach(place => {
-                const marker = L.marker(place.coords, { icon: smallIcon }).addTo(map);
-
-                marker.on("mouseover", () => {
-                    document.getElementById("memory-photo").src = place.photo;
-                    document.getElementById("memory-title").textContent = place.name;
-                    document.getElementById("memory-note").textContent = place.note;
-                    document.getElementById("memory-card").style.display = "block";
-                });
-            });
-        </script>
+    </script>
 
 </body>
 
