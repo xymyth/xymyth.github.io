@@ -1,46 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Travel | Yarong Xiao</title>
 
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="travel.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            max-width: 850px;
+            margin: auto;
+            padding: 40px 50px;
+            color: #333;
+        }
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back {
+            font-size: 16px;
+            margin-bottom: 55px;
+        }
+
+        #map {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        <h1>Yarong Xiao</h1>
-        <p>肖亚蓉</p>
-    </header>
 
-    <hr>
+    <div class="back">
+        <a href="../index.html">← Home</a>
+    </div>
 
-    <section>
-        <h2>Travel</h2>
-        <p class="section-note">
-            A small archive of where I've been and what I've loved.
-        </p>
+    <div id="map">
+        <!-- map will be added here later -->
+    </div>
 
-        <div class="travel-layout">
-            <div id="map"></div>
-
-            <div id="story-card">
-                <h3 id="place-title">Move your mouse over a flag</h3>
-                <img id="place-photo" src="" alt="">
-                <p id="place-note">A photo and note will appear here.</p>
-                <p id="place-years"></p>
-            </div>
-        </div>
-
-        <p class="links-line">
-            <a href="../index.html">← Back to home</a>
-        </p>
-    </section>
-
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="travel.js"></script>
 </body>
+
 </html>
