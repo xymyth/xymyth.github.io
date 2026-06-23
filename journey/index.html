@@ -135,6 +135,9 @@
                 document.getElementById("memory-note").textContent = place.note;
                 document.getElementById("memory-card").style.display = "block";
             });
+            marker.on("mouseout", () => {
+                document.getElementById("memory-card").style.display = "none";
+            });
         });
     </script>
 
