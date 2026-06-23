@@ -1,1 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <title>Journey | Yarong</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            max-width: 850px;
+            margin: auto;
+            padding: 40px 50px;
+            color: #333;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back {
+            font-size: 16px;
+            margin-bottom: 55px;
+        }
+
+        #map {
+            width: 100%;
+            height: 520px;
+            position: relative;
+        }
+
+        .small-dot {
+            width: 7px;
+            height: 7px;
+            background: #8b2f2f;
+            border-radius: 50%;
+            border: 1px solid white;
+        }
+
+        #memory-card {
+            display: none;
+            position: absolute;
+            right: 28px;
+            top: 28px;
+            width: 230px;
+            background: white;
+            padding: 4px 12px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+            z-index: 1000;
+        }
+
+        #memory-photo {
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        #memory-title {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 23px;
+            font-weight: normal;
+            margin: 0; 
+        }
+
+        #memory-note {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="back">
+        <a href="../index.html">← Home</a>
+    </div>
+
+    <div id="map">
+        <div id="memory-card">
+            <img id="memory-photo" src="" alt="">
+            <h2 id="memory-title"></h2>
+            <p id="memory-note"></p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        const map = L.map("map").setView([25, 0], 2);
+
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png", {
+            attribution: ""
+        }).addTo(map);
+
+        const smallIcon = L.divIcon({
+            className: "small-dot",
+            iconSize: [7, 7]
+        });
+
+        const places = [
+            {
+                name: "Hefei",
+                coords: [31.8206, 117.2272],
+                photo: "photos/hefei.jpg",
+                note: "Home. Family"
+            },
+            {
+                name: "Beijing",
+                coords: [39.9042, 116.4074],
+                photo: "photos/beijing.jpg",
+                note: "A city of departures, pressure, and growing up."
+            },
+            {
+                name: "Rochester",
+                coords: [43.1566, -77.6088],
+                photo: "photos/rochester.jpg",
+                note: "Snow, silence, long runs, and becoming someone new."
+            }
+        ];
+
+        places.forEach(place => {
+            const marker = L.marker(place.coords, { icon: smallIcon }).addTo(map);
+
+            marker.on("mouseover", () => {
+                document.getElementById("memory-photo").src = place.photo;
+                document.getElementById("memory-title").textContent = place.name;
+                document.getElementById("memory-note").textContent = place.note;
+                document.getElementById("memory-card").style.display = "block";
+            });
+        });
+    </script>
+
+</body>
+
+</html>
