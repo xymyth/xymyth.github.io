@@ -138,7 +138,7 @@
             const marker = L.marker(place.coords, { icon: smallIcon }).addTo(map);
 
             marker.on("mouseover", () => {
-                document.getElementById("memory-photos").innerHTML = place.photos.map(src => `<img src="${src}" alt="">`).join("");
+                document.getElementById("memory-photos").innerHTML = (place.photos || []).map(src => `<img src="${src}" alt="">`).join("");
                 document.getElementById("memory-title").textContent = place.name;
                 document.getElementById("memory-note").textContent = place.note;
                 document.getElementById("memory-card").style.display = "block";
